@@ -1,0 +1,73 @@
+NAME
+    File::Find::Rule::RPM::Spec - Common rules for searching RPM spec files.
+
+SYNOPSIS
+     use File::Find::Rule;
+     use File::Find::Rule::RPM::Spec;
+
+     my @files = File::Find::Rule->rpm_spec->in($dir);
+     my @files = File::Find::Rule->rpm_spec_preamble($preamble_hr)->in($dir);
+
+DESCRIPTION
+    This Perl module contains File::Find::Rule rules for detecting DWG
+    files.
+
+    See .dwg on Wikipedia <https://en.wikipedia.org/wiki/.dwg>.
+
+SUBROUTINES
+  "dwg"
+     my @files = File::Find::Rule->rpm_spec->in($dir);
+
+    The "dwg()" rule detect DWG files.
+
+  "dwg_magic"
+     my @files = File::Find::Rule->rpm_spec_preamble($preamble_hr)->in($dir);
+
+    The "dwg_magic($acad_magic)" rule detect DWG files for one magic version
+    (e.g. AC1008).
+
+EXAMPLE
+     use strict;
+     use warnings;
+
+     use File::Find::Rule;
+     use File::Find::Rule::DWG;
+
+     # Arguments.
+     if (@ARGV < 1) {
+             print STDERR "Usage: $0 dir\n";
+             exit 1;
+     }
+     my $dir = $ARGV[0];
+
+     # Print all DWG files in directory.
+     foreach my $file (File::Find::Rule->dwg->in($dir)) {
+             print "$file\n";
+     }
+
+     # Output like:
+     # Usage: qr{[\w\/]+} dir
+
+DEPENDENCIES
+    Error::Pure, File::Find::Rule. Parse::RPM::Spec, Readonly.
+
+SEE ALSO
+    File::Find::Rule
+        Alternative interface to File::Find.
+
+REPOSITORY
+    <https://github.com/michal-josef-spacek/File-Find-Rule-RPM-Spec>
+
+AUTHOR
+    Michal Josef Špaček <mailto:skim@cpan.org>
+
+    <http://skim.cz>
+
+LICENSE AND COPYRIGHT
+    © 2023-2024 Michal Josef Špaček
+
+    BSD 2-Clause License
+
+VERSION
+    0.01
+
