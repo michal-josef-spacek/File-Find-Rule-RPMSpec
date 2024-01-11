@@ -29,26 +29,32 @@ sub File::Find::Rule::rpm_spec {
 # Detect RPM spec file via string in license.
 sub File::Find::Rule::rpm_spec_license {
 	my ($file_find_rule, $license) = @_;
+
 	return _rpm_spec_common($file_find_rule, 'license', $license);
 }
 
 # Detect RPM spec file via string in name.
 sub File::Find::Rule::rpm_spec_name {
 	my ($file_find_rule, $name) = @_;
+
 	return _rpm_spec_common($file_find_rule, 'name', $name);
 }
 
 # Detect RPM spec file via string in version.
 sub File::Find::Rule::rpm_spec_version {
 	my ($file_find_rule, $version) = @_;
+
 	return _rpm_spec_common($file_find_rule, 'version', $version);
 }
 
 sub _rpm_spec_common {
 	my ($file_find_rule, $method, $value) = @_;
+
 	my $self = $file_find_rule->_force_object;
+
 	return $self->file->exec(sub{
 		my $file = shift;
+
 		my $spec = Parse::RPM::Spec->new({
 			'file' => $file,
 		});
